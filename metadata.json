@@ -1,5 +1,9 @@
+
 {
-  "name": "xOpsentia - Landing Page",
-  "description": "A high-performance landing page for an AI-powered multi-modal part search and discovery system.",
-  "requestFramePermissions": []
+  "name": "xOpsentia - Intelligent Discovery",
+  "description": "A high-performance landing page and AI demo for multi-modal part search and discovery.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
 }

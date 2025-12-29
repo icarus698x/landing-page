@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
             onClick={onOpenModal}
             className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-brand-600 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-brand-500/40"
           >
-            Request Demo
+            Try Live Demo
           </button>
         </div>
       </div>

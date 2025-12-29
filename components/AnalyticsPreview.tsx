@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Activity, Search, AlertCircle, Database } from 'lucide-react';
@@ -89,9 +90,9 @@ const AnalyticsPreview: React.FC = () => {
                     <span className="text-xs font-medium text-slate-400">Last 24 Hours</span>
                  </div>
                  
-                 {/* Mock Area Chart */}
-                 <div className="h-48 w-full mb-6">
-                   <ResponsiveContainer width="100%" height="100%">
+                 {/* Fixed Recharts Warning by ensuring stable parent dimensions */}
+                 <div className="h-48 min-h-[192px] w-full mb-6 overflow-hidden">
+                   <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                      <AreaChart data={searchVolumeData}>
                        <defs>
                          <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">

@@ -8,23 +8,18 @@ import FeatureGrid from './components/FeatureGrid';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ScrollReveal from './components/ScrollReveal';
-import RequestDemoModal from './components/RequestDemoModal';
+import DemoView from './components/demo/DemoView';
+import AnalyticsPreview from './components/AnalyticsPreview';
+import CallToAction from './components/CallToAction';
 
-const App: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  // Path to the asset. 
-  // Switched to external dummy image for reliability.
+const LandingView: React.FC<{ onOpenDemo: () => void }> = ({ onOpenDemo }) => {
   const heroImage = 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2070';
- 
+  
   return (
     <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-slate-50">
-      <Navbar onOpenModal={openModal} />
+      <Navbar onOpenModal={onOpenDemo} />
       <main className="flex-grow">
-        <Hero onOpenModal={openModal} imageSrc={heroImage} />
+        <Hero onOpenModal={onOpenDemo} imageSrc={heroImage} />
         
         <ScrollReveal>
           <CoreValues />
@@ -33,7 +28,15 @@ const App: React.FC = () => {
         <ProcessSteps />
 
         <ScrollReveal>
-          <FeatureGrid onOpenModal={openModal} />
+          <FeatureGrid onOpenModal={onOpenDemo} />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <AnalyticsPreview />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <CallToAction onOpenModal={onOpenDemo} />
         </ScrollReveal>
 
         <ScrollReveal>
@@ -41,9 +44,21 @@ const App: React.FC = () => {
         </ScrollReveal>
       </main>
       <Footer />
-      <RequestDemoModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
+};
+
+const App: React.FC = () => {
+  const [view, setView] = useState<'landing' | 'demo'>('landing');
+
+  const openDemo = () => setView('demo');
+  const closeDemo = () => setView('landing');
+
+  if (view === 'demo') {
+    return <DemoView onClose={closeDemo} />;
+  }
+
+  return <LandingView onOpenDemo={openDemo} />;
 };
 
 export default App;

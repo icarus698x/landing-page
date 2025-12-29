@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({
               onClick={onOpenModal}
               className="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 flex items-center justify-center hover:-translate-y-0.5"
             >
-                Request Demo
+                Try Live Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
             </button>
             
