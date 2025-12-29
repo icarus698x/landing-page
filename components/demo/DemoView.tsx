@@ -27,7 +27,7 @@ interface Message {
   matches?: ImageMatch[];
 }
 
-const API_BASE_URL = "https://api.xopsentia.com:8080";
+const API_BASE_URL = "https://api.xopsentia.com";
 
 // SAS URL cache
 const sasUrlCache: { [key: string]: string } = {};
