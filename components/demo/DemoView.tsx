@@ -428,7 +428,7 @@ const DemoView: React.FC<DemoViewProps> = ({ onClose }) => {
             <button onClick={onClose} className="p-2 -ml-2 hover:bg-white/5 rounded-full transition-colors group">
                 <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
             </button>
-            <span className="font-bold text-base tracking-tight text-white">Icarus</span>
+            <span className="font-bold text-base tracking-tight text-white">xOpsentia</span>
           </div>
         </header>
 
@@ -478,7 +478,7 @@ const DemoView: React.FC<DemoViewProps> = ({ onClose }) => {
                       </div>
                       <div className="flex-1 min-w-0 space-y-3">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-white text-sm">Icarus</span>
+                          <span className="font-semibold text-white text-sm">xOpsentia</span>
                           {msg.matches && msg.matches.length > 0 && (
                             <span className="text-xs text-[#888]">Matching Images ({msg.matches.length})</span>
                           )}
@@ -601,7 +601,7 @@ const DemoView: React.FC<DemoViewProps> = ({ onClose }) => {
               </div>
               <div className="mt-2 text-center">
                  <span className="text-[10px] text-[#555]">
-                    Icarus can make mistakes. Check important info.
+                    xOpsentia can make mistakes. Check important info.
                  </span>
               </div>
             </div>
