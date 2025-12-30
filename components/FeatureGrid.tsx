@@ -131,57 +131,116 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({ onOpenModal }) => {
         </div>
 
         {/* Comparison Table Container */}
-        <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden mb-16">
+        <div className="mb-16">
           
-          {/* Table Header - Hidden on small screens, shown on md+ */}
-          <div className="hidden md:grid grid-cols-12 bg-slate-50 border-b border-slate-200 text-sm font-bold text-slate-500 uppercase tracking-wider">
-            <div className="col-span-4 py-6 px-8">Feature</div>
-            <div className="col-span-4 py-6 px-8 text-brand-700">Our Solution</div>
-            <div className="col-span-4 py-6 px-8">Legacy Approaches</div>
+          {/* Desktop Table */}
+          <div className="hidden lg:block bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            {/* Table Header */}
+            <div className="grid grid-cols-12 bg-slate-50 border-b border-slate-200 text-sm font-bold text-slate-500 uppercase tracking-wider">
+              <div className="col-span-4 py-6 px-8">Feature</div>
+              <div className="col-span-4 py-6 px-8 text-brand-700">Our Solution</div>
+              <div className="col-span-4 py-6 px-8">Legacy Approaches</div>
+            </div>
+
+            {/* Table Body */}
+            <div className="divide-y divide-slate-100">
+              {features.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="grid grid-cols-12 hover:bg-slate-50/50 transition-colors duration-200 group"
+                >
+                  
+                  {/* Feature Name Column */}
+                  <div className="col-span-4 p-8 flex items-center border-r border-transparent">
+                    <div className="mr-4 p-2 bg-slate-100 rounded-lg text-slate-600 group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors">
+                      <item.icon className="w-6 h-6" strokeWidth={1.5} />
+                    </div>
+                    <span className="font-bold text-slate-900">{item.label}</span>
+                    {item.isUpcoming && (
+                       <span className="ml-3 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                         Upcoming
+                       </span>
+                    )}
+                  </div>
+
+                  {/* Our Solution Column */}
+                  <div className="col-span-4 p-8 bg-brand-50/10 flex items-start space-x-4 border-r border-slate-100">
+                     <div className="flex-shrink-0 mt-0.5">
+                        <div className="w-6 h-6 rounded bg-emerald-500 flex items-center justify-center shadow-sm">
+                          <Check className="w-4 h-4 text-white stroke-[3]" />
+                        </div>
+                     </div>
+                     <span className="text-slate-800 font-medium leading-snug pt-0.5">
+                       {item.ourSolution}
+                     </span>
+                  </div>
+
+                  {/* Legacy Column */}
+                  <div className="col-span-4 p-8 flex items-start space-x-4">
+                     <div className="flex-shrink-0 mt-0.5">
+                        {item.legacyType === 'danger' ? (
+                          <div className="w-6 h-6 rounded bg-rose-600 flex items-center justify-center shadow-sm">
+                             <X className="w-4 h-4 text-white stroke-[3]" />
+                          </div>
+                        ) : (
+                          <div className="w-6 h-6 rounded bg-amber-500 flex items-center justify-center shadow-sm">
+                             <HelpCircle className="w-4 h-4 text-white stroke-[3]" />
+                          </div>
+                        )}
+                     </div>
+                     <span className="text-slate-500 leading-snug pt-0.5">
+                       {item.legacy}
+                     </span>
+                  </div>
+
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Table Body */}
-          <div className="divide-y divide-slate-100">
+          {/* Mobile Card Layout */}
+          <div className="lg:hidden space-y-4">
             {features.map((item, index) => (
               <div 
-                key={index} 
-                className="grid grid-cols-1 md:grid-cols-12 hover:bg-slate-50/50 transition-colors duration-200 group"
+                key={index}
+                className="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden p-6 hover:shadow-lg transition-shadow duration-200"
               >
-                
-                {/* Feature Name Column */}
-                <div className="md:col-span-4 p-6 md:px-8 flex items-center md:border-r border-slate-50 md:border-transparent">
-                  <div className="mr-4 p-2 bg-slate-100 rounded-lg text-slate-600 group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors">
-                    <item.icon className="w-6 h-6" strokeWidth={1.5} />
+                {/* Feature Header */}
+                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-100">
+                  <div className="p-2 bg-slate-100 rounded-lg text-slate-600">
+                    <item.icon className="w-5 h-5" strokeWidth={1.5} />
                   </div>
-                  <span className="font-bold text-slate-900 text-lg md:text-base">{item.label}</span>
-                  {item.isUpcoming && (
-                     <span className="ml-3 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
-                       Upcoming
-                     </span>
-                  )}
+                  <div className="flex-1">
+                    <span className="font-bold text-slate-900 text-base">{item.label}</span>
+                    {item.isUpcoming && (
+                       <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                         Upcoming
+                       </span>
+                    )}
+                  </div>
                 </div>
 
-                {/* Our Solution Column */}
-                <div className="md:col-span-4 p-6 md:px-8 bg-brand-50/10 flex items-start space-x-4 border-l-4 border-brand-500 md:border-l-0 md:border-r md:border-slate-100 relative">
-                   {/* Mobile Label */}
-                   <span className="md:hidden absolute top-6 right-6 text-xs font-bold text-brand-600 uppercase tracking-wider opacity-50">Our Solution</span>
-                   
-                   <div className="flex-shrink-0 mt-0.5">
+                {/* Our Solution */}
+                <div className="mb-5">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-0.5">
                       <div className="w-6 h-6 rounded bg-emerald-500 flex items-center justify-center shadow-sm">
                         <Check className="w-4 h-4 text-white stroke-[3]" />
                       </div>
-                   </div>
-                   <span className="text-slate-800 font-medium leading-snug pt-0.5">
-                     {item.ourSolution}
-                   </span>
+                    </div>
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Our Solution</span>
+                      <span className="text-slate-800 font-medium text-sm leading-snug">
+                        {item.ourSolution}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Legacy Column */}
-                <div className="md:col-span-4 p-6 md:px-8 flex items-start space-x-4 border-l-4 border-slate-200 md:border-l-0">
-                    {/* Mobile Label */}
-                   <span className="md:hidden absolute top-6 right-6 text-xs font-bold text-slate-400 uppercase tracking-wider opacity-50">Legacy</span>
-
-                   <div className="flex-shrink-0 mt-0.5">
+                {/* Legacy Approaches */}
+                <div>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-0.5">
                       {item.legacyType === 'danger' ? (
                         <div className="w-6 h-6 rounded bg-rose-600 flex items-center justify-center shadow-sm">
                            <X className="w-4 h-4 text-white stroke-[3]" />
@@ -191,12 +250,15 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({ onOpenModal }) => {
                            <HelpCircle className="w-4 h-4 text-white stroke-[3]" />
                         </div>
                       )}
-                   </div>
-                   <span className="text-slate-500 leading-snug pt-0.5">
-                     {item.legacy}
-                   </span>
+                    </div>
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Legacy Approaches</span>
+                      <span className="text-slate-500 text-sm leading-snug">
+                        {item.legacy}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-
               </div>
             ))}
           </div>
