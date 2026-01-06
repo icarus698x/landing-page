@@ -265,13 +265,15 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({ onOpenModal }) => {
         </div>
 
         <div className="text-center">
-            <button 
-              onClick={onOpenModal}
+            <a 
+              href="https://demo.xopsentia.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transform hover:-translate-y-0.5"
             >
                 Try Live Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            </a>
         </div>
 
       </div>

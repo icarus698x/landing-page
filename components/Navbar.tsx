@@ -51,12 +51,14 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
           >
             Features
           </a>
-          <button 
-            onClick={onOpenModal}
-            className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-brand-600 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-brand-500/40"
+          <a 
+            href="https://demo.xopsentia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-brand-600 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-brand-500/40 inline-block"
           >
             Try Live Demo
-          </button>
+          </a>
         </div>
       </div>
     </nav>

@@ -24,13 +24,15 @@ const CallToAction: React.FC<CallToActionProps> = ({ onOpenModal }) => {
           Join leading industrial teams who are reducing downtime and improving data accuracy with xOpsentia.
         </p>
         
-        <button 
-          onClick={onOpenModal}
+        <a 
+          href="https://demo.xopsentia.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transform hover:-translate-y-0.5"
         >
           Try Live Demo
           <ArrowRight className="ml-2 h-5 w-5" />
-        </button>
+        </a>
         
         <p className="mt-6 text-sm text-slate-500">
           No credit card required. Custom pilots available for enterprise teams.

@@ -39,13 +39,15 @@ const Hero: React.FC<HeroProps> = ({
         </p>
 
         <div className="opacity-0 animate-fade-in-up delay-[400ms] fill-mode-forwards flex flex-col sm:flex-row justify-center gap-4 mb-20">
-            <button 
-              onClick={onOpenModal}
-              className="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 flex items-center justify-center hover:-translate-y-0.5"
+            <a 
+              href="https://demo.xopsentia.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 flex items-center justify-center hover:-translate-y-0.5 inline-flex"
             >
                 Try Live Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            </a>
             
         </div>
 
