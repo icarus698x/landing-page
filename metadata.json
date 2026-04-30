@@ -1,9 +1,0 @@
-
-{
-  "name": "xOpsentia - Intelligent Discovery",
-  "description": "A high-performance landing page and AI demo for multi-modal part search and discovery.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
-}

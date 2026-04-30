@@ -1,0 +1,30 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Teal background gradient: light top-left to dark bottom-right -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#04c4b4"/>
+      <stop offset="50%"  stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#045f5f"/>
+    </linearGradient>
+    <!-- Divider line: transparent → white → transparent (top to bottom) -->
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+      <stop offset="30%"  stop-color="white" stop-opacity="0.7"/>
+      <stop offset="70%"  stop-color="white" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gradient teal background -->
+  <rect width="500" height="500" fill="url(#bgGrad)"/>
+
+  <!-- x: pure white -->
+  <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(45)"/>
+  <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(-45)"/>
+
+  <!-- Vertical divider: white gradient fade -->
+  <rect x="246" y="165" width="1.5" height="170" rx="0.75" fill="url(#lineGrad)"/>
+
+  <!-- O: pure white ring -->
+  <circle cx="315" cy="250" r="52" fill="none" stroke="white" stroke-width="16"/>
+</svg>

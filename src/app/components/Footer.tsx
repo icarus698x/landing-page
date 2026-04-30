@@ -1,0 +1,119 @@
+import { Link } from "react-router";
+
+const routeMap: Record<string, string> = {
+  "AI Assistant": "/platform/ai-assistant",
+  "Knowledge Base": "/platform/knowledge-base",
+  "Operations Dashboard": "/platform/operations-dashboard",
+  "Expert Escalation": "/platform/expert-escalation",
+  "Document Intelligence": "/platform/document-intelligence",
+  "More Features": "/platform/more-features",
+};
+
+function getHref(label: string): string {
+  return routeMap[label] ?? "#";
+}
+
+const footerLinks: Record<string, string[]> = {
+  Platform: ["AI Assistant", "Knowledge Base", "Operations Dashboard", "Expert Escalation", "Document Intelligence", "More Features"],
+  Solutions: ["Troubleshooting", "Manuals Discovery", "Expert Support", "Repair Visibility"],
+  Security: ["Deployment", "Data Ownership", "Access Control", "Auditability", "FAQs"],
+  Company: ["About Us", "Contact"],
+};
+
+export function Footer() {
+  return (
+    <footer
+      className="border-t pt-14 pb-10 bg-white"
+      style={{ borderColor: "rgba(0,0,0,0)" }}
+    >
+      <div className="w-full px-[24px] py-[0px] mx-[0px] my-[-19px]">
+        {/* Links row */}
+        <div className="flex flex-col md:flex-row md:justify-between gap-8 p-[0px] mx-[0px] mt-[0px] mb-[48px]">
+          {/* Brand — left aligned */}
+          <div className="space-y-3 shrink-0">
+            <Link to="/" className="flex items-center gap-2">
+              <svg width="28" height="28" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 7 }}>
+                <defs>
+                  <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#04c4b4"/>
+                    <stop offset="50%" stopColor="#0D9488"/>
+                    <stop offset="100%" stopColor="#045f5f"/>
+                  </linearGradient>
+                  <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="white" stopOpacity="0"/>
+                    <stop offset="30%" stopColor="white" stopOpacity="0.7"/>
+                    <stop offset="70%" stopColor="white" stopOpacity="0.7"/>
+                    <stop offset="100%" stopColor="white" stopOpacity="0"/>
+                  </linearGradient>
+                </defs>
+                <rect width="500" height="500" fill="url(#bgGrad)"/>
+                <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(45)"/>
+                <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(-45)"/>
+                <rect x="246" y="165" width="1.5" height="170" rx="0.75" fill="url(#lineGrad)"/>
+                <circle cx="315" cy="250" r="52" fill="none" stroke="white" strokeWidth="16"/>
+              </svg>
+              <span className="text-gray-900 font-semibold text-sm tracking-tight">xOpsentia</span>
+            </Link>
+            <p className="text-xs text-gray-400" style={{ lineHeight: 1.6 }}>
+              Field-ready AI for industrial operations.
+            </p>
+          </div>
+
+          {/* Nav groups — right aligned */}
+          <div className="flex flex-wrap md:flex-nowrap gap-8 md:justify-end m-[0px] p-[0px]">
+            {Object.entries(footerLinks).map(([section, links]) => (
+              <div key={section} className="space-y-3 px-[6px] py-[0px] text-left">
+                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider p-[0px]">{section}</p>
+                <ul className="space-y-2">
+                  {links.map((link) => (
+                    <li className="ml-[-1px] mr-[0px] mt-[0px] mb-[8px] p-[0px]" key={link}>
+                      {getHref(link) !== "#" ? (
+                        <Link
+                          to={getHref(link)}
+                          className="text-xs text-gray-400 hover:text-gray-700 transition-colors p-[0px] m-[0px]"
+                        >
+                          {link}
+                        </Link>
+                      ) : (
+                        <a href="#" className="text-xs text-gray-400 hover:text-gray-700 transition-colors p-[0px] m-[0px]">
+                          {link}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
+
+        {/* Bottom bar */}
+        <div className="w-full mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-400">
+            © {new Date().getFullYear()} xOpsentia. All rights reserved.
+          </p>
+
+          <a
+            href="https://www.linkedin.com/company/xopsentia/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-[#0D9488] transition-colors"
+            aria-label="LinkedIn"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
