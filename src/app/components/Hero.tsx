@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { ScreenshotPlaceholder } from "./ScreenshotPlaceholder";
 import { FloatingWindows } from "./FloatingWindows";
 
@@ -34,9 +35,10 @@ export function Hero() {
           <span style={{ color: "rgba(15, 23, 41,0.8)" }}>Instantly.</span>
         </h1>
 
-        {/* CTA — white button so it pops off the teal */}
-        <button
-          className="px-7 py-3 rounded-full text-sm font-semibold mb-4 transition-all hover:scale-[1.02] hover:shadow-lg"
+        {/* CTA */}
+        <Link
+          to="/contact"
+          className="px-7 py-3 rounded-full text-sm font-semibold mb-4 transition-all hover:scale-[1.02] hover:shadow-lg inline-block"
           style={{
             background: "#0D9488",
             color: "#ffffff",
@@ -44,8 +46,8 @@ export function Hero() {
             borderRadius: 7,
           }}
         >
-          Book a free demo
-        </button>
+          Contact Us
+        </Link>
 
         {/* Note */}
         <p className="text-xs" style={{ color: "rgba(15, 23, 41, 0.6)" }}>
@@ -53,14 +55,14 @@ export function Hero() {
         </p>
       </div>
 
-      {/* ── Screenshot — sits in the teal→white transition zone ────────────── */}
+      {/* ── Screenshot ──────────────────────────────────────────────────────── */}
       <div className="relative max-w-4xl mx-auto mt-14 px-6" style={{ zIndex: 10 }}>
         <div style={{ borderRadius: "16px", overflow: "hidden" }}>
           <ScreenshotPlaceholder label="AI Assistant" height="400px" />
         </div>
       </div>
 
-      {/* ── Sub-headline — appears on the white zone ────────────────────────── */}
+      {/* ── Sub-headline ────────────────────────────────────────────────────── */}
       <div className="relative max-w-2xl mx-auto mt-16 mb-20 px-6 text-center" style={{ zIndex: 10 }}>
         <p
           className="text-gray-500 text-[18px] font-normal"

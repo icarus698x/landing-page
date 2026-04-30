@@ -128,6 +128,21 @@
     @apply bg-background text-foreground;
   }
 
+  /* ── xOpsentia responsive screenshot scaling ── */
+  @media (max-width: 639px) {
+    .feature-screenshot-mobile { zoom: 0.72; }
+    .xo-screenshot-frame       { zoom: 0.68; }
+  }
+  @media (min-width: 640px) and (max-width: 767px) {
+    .xo-screenshot-frame { zoom: 0.82; }
+  }
+
+  /* ── xOpsentia animations ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
   * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.

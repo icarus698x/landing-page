@@ -31,7 +31,7 @@ export function ScreenshotFrame({
 }) {
   return (
     <div
-      className={`w-full rounded-2xl overflow-hidden ${className}`}
+      className={`xo-screenshot-frame w-full rounded-2xl overflow-hidden ${className}`}
       style={{
         background: "linear-gradient(160deg, #f0fdfa 0%, #f8fafc 100%)",
         border: "1px solid rgba(13,148,136,0.12)",

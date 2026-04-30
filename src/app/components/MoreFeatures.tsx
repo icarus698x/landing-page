@@ -15,18 +15,6 @@ const features = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="8" cy="6" r="3" />
-        <path d="M2 18c0-3.314 2.686-6 6-6s6 2.686 6 6" />
-        <path d="M14 4l2 2-2 2" />
-        <path d="M16 6h2" />
-      </svg>
-    ),
-    title: "Role-based access",
-    description: "Control who can access which manuals, systems, and queries — granular permissions at every level.",
-  },
-  {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="7" />
         <path d="M10 6v4l2.5 2.5" />
       </svg>
@@ -42,7 +30,7 @@ const features = [
         <circle cx="15" cy="13" r="1.5" fill="#0D9488" stroke="none" />
       </svg>
     ),
-    title: "Session status",
+    title: "Issue status",
     description: "Track whether a troubleshooting case is active, ongoing, or resolved — across all sites and teams.",
   },
   {
@@ -67,30 +55,6 @@ const mockScreenshots = [
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", borderRadius: 8, background: i === 0 ? "rgba(13,148,136,0.12)" : "rgba(13,148,136,0.05)", border: "1px solid rgba(13,148,136,0.08)" }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: i === 0 ? "#0D9488" : "rgba(13,148,136,0.25)", flexShrink: 0 }} />
           <div style={{ height: 5, borderRadius: 3, background: "rgba(13,148,136,0.25)", width: `${w * 100}%` }} />
-        </div>
-      ))}
-    </div>
-  ),
-  // Role-based access — permission matrix
-  (
-    <div style={{ width: "88%", display: "flex", flexDirection: "column", gap: 6 }}>
-      <div style={{ display: "flex", gap: 6, marginBottom: 4 }}>
-        {["Admin", "Tech", "Viewer"].map((r) => (
-          <div key={r} style={{ flex: 1, height: 22, borderRadius: 6, background: "rgba(13,148,136,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ height: 4, width: "60%", borderRadius: 2, background: "rgba(13,148,136,0.4)" }} />
-          </div>
-        ))}
-      </div>
-      {[0.9, 0.6, 0.75, 0.5].map((_, i) => (
-        <div key={i} style={{ display: "flex", gap: 6 }}>
-          <div style={{ flex: 1.4, height: 20, borderRadius: 6, background: "rgba(13,148,136,0.06)", display: "flex", alignItems: "center", paddingLeft: 8 }}>
-            <div style={{ height: 4, width: "70%", borderRadius: 2, background: "rgba(13,148,136,0.2)" }} />
-          </div>
-          {[true, i < 2, false].map((on, j) => (
-            <div key={j} style={{ flex: 1, height: 20, borderRadius: 6, background: on ? "rgba(13,148,136,0.14)" : "rgba(0,0,0,0.03)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {on && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#0D9488" }} />}
-            </div>
-          ))}
         </div>
       ))}
     </div>
@@ -174,6 +138,18 @@ function MockScreenshot({ index }: { index: number }) {
   );
 }
 
+function useWindowWidth() {
+  const [w, setW] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+  useEffect(() => {
+    const handler = () => setW(window.innerWidth);
+    window.addEventListener("resize", handler, { passive: true });
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return w;
+}
+
 // Slot styles: 0 = front, 1 = mid, 2 = back
 const SLOT_STYLES = [
   {
@@ -200,6 +176,8 @@ export function MoreFeatures() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const n = features.length;
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 640;
 
   const prev = () => setActive((a) => (a - 1 + n) % n);
   const next = () => setActive((a) => (a + 1) % n);
@@ -224,7 +202,6 @@ export function MoreFeatures() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          
           <h2
             className="text-3xl md:text-4xl text-gray-900 tracking-tight"
             style={{ fontWeight: 700, letterSpacing: "-0.025em" }}
@@ -242,13 +219,15 @@ export function MoreFeatures() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-
-          {/* Card stack container — height accounts for the 36px upward offset of back cards */}
-          <div style={{ position: "relative", height: 300, marginBottom: 48 }}>
+          {/* Card stack container */}
+          <div style={{ position: "relative", height: isMobile ? "auto" : 300, marginBottom: 48 }}>
             {features.map((f, i) => {
               const slot = getSlot(i);
-              if (slot === null) return null;
-              const s = SLOT_STYLES[slot];
+              // On mobile: only render the active card (slot 0)
+              if (isMobile && slot !== 0) return null;
+              if (!isMobile && slot === null) return null;
+
+              const s = SLOT_STYLES[slot ?? 0];
               const isActive = slot === 0;
 
               return (
@@ -256,30 +235,34 @@ export function MoreFeatures() {
                   key={i}
                   onClick={isActive ? undefined : next}
                   style={{
-                    position: "absolute",
-                    top: 36, // leaves room at top for back-card offset
+                    position: isMobile ? "relative" : "absolute",
+                    top: isMobile ? 0 : 36,
                     left: 0,
                     right: 0,
-                    height: 264,
-                    transform: s.transform,
-                    opacity: s.opacity,
+                    height: isMobile ? "auto" : 264,
+                    transform: isMobile ? "none" : s.transform,
+                    opacity: isMobile ? 1 : s.opacity,
                     zIndex: s.zIndex,
-                    boxShadow: s.boxShadow,
-                    transition: "transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.45s cubic-bezier(0.4,0,0.2,1), box-shadow 0.45s",
+                    boxShadow: isMobile
+                      ? "0 4px 24px rgba(0,0,0,0.08)"
+                      : s.boxShadow,
+                    transition:
+                      "transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.45s cubic-bezier(0.4,0,0.2,1), box-shadow 0.45s",
                     borderRadius: 20,
                     background: "#fff",
                     border: "1px solid rgba(0,0,0,0.07)",
                     display: "flex",
+                    flexDirection: isMobile ? "column" : "row",
                     overflow: "hidden",
                     cursor: isActive ? "default" : "pointer",
                   }}
                 >
-                  {/* Left: text */}
+                  {/* Left / top: text */}
                   <div
                     style={{
-                      width: "42%",
+                      width: isMobile ? "100%" : "42%",
                       flexShrink: 0,
-                      padding: "36px 40px",
+                      padding: isMobile ? "28px 24px" : "36px 40px",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
@@ -288,15 +271,15 @@ export function MoreFeatures() {
                   >
                     <div
                       style={{
-                        width: 44,
-                        height: 44,
+                        width: 40,
+                        height: 40,
                         borderRadius: 12,
                         background: "rgba(13,148,136,0.07)",
                         border: "1px solid rgba(13,148,136,0.13)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginBottom: 18,
+                        marginBottom: 16,
                         flexShrink: 0,
                       }}
                     >
@@ -304,7 +287,7 @@ export function MoreFeatures() {
                     </div>
                     <h3
                       style={{
-                        fontSize: 20,
+                        fontSize: isMobile ? 18 : 20,
                         fontWeight: 700,
                         color: "#111827",
                         marginBottom: 10,
@@ -318,17 +301,19 @@ export function MoreFeatures() {
                     </p>
                   </div>
 
-                  {/* Right: screenshot placeholder */}
-                  <div
-                    style={{
-                      flex: 1,
-                      padding: "24px 24px 24px 12px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <MockScreenshot index={i} />
-                  </div>
+                  {/* Right: screenshot placeholder — desktop only */}
+                  {!isMobile && (
+                    <div
+                      style={{
+                        flex: 1,
+                        padding: "24px 24px 24px 12px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <MockScreenshot index={i} />
+                    </div>
+                  )}
                 </div>
               );
             })}

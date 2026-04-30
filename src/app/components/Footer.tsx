@@ -1,96 +1,76 @@
 import { Link } from "react-router";
 
-const routeMap: Record<string, string> = {
-  "AI Assistant": "/platform/ai-assistant",
-  "Knowledge Base": "/platform/knowledge-base",
-  "Operations Dashboard": "/platform/operations-dashboard",
-  "Expert Escalation": "/platform/expert-escalation",
-  "Document Intelligence": "/platform/document-intelligence",
-  "More Features": "/platform/more-features",
-};
-
-function getHref(label: string): string {
-  return routeMap[label] ?? "#";
-}
-
-const footerLinks: Record<string, string[]> = {
-  Platform: ["AI Assistant", "Knowledge Base", "Operations Dashboard", "Expert Escalation", "Document Intelligence", "More Features"],
-  Solutions: ["Troubleshooting", "Manuals Discovery", "Expert Support", "Repair Visibility"],
-  Security: ["Deployment", "Data Ownership", "Access Control", "Auditability", "FAQs"],
-  Company: ["About Us", "Contact"],
-};
-
 export function Footer() {
   return (
-    <footer
-      className="border-t pt-14 pb-10 bg-white"
-      style={{ borderColor: "rgba(0,0,0,0)" }}
-    >
-      <div className="w-full px-[24px] py-[0px] mx-[0px] my-[-19px]">
-        {/* Links row */}
-        <div className="flex flex-col md:flex-row md:justify-between gap-8 p-[0px] mx-[0px] mt-[0px] mb-[48px]">
-          {/* Brand — left aligned */}
-          <div className="space-y-3 shrink-0">
+    <footer className="border-t pt-14 pb-10 bg-white" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+      <div className="w-full px-6 mx-0">
+        {/* Top row */}
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
+          {/* Brand */}
+          <div className="space-y-3 shrink-0 max-w-xs">
             <Link to="/" className="flex items-center gap-2">
               <svg width="28" height="28" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 7 }}>
                 <defs>
-                  <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="bgGradF" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#04c4b4"/>
                     <stop offset="50%" stopColor="#0D9488"/>
                     <stop offset="100%" stopColor="#045f5f"/>
                   </linearGradient>
-                  <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <linearGradient id="lineGradF" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="white" stopOpacity="0"/>
                     <stop offset="30%" stopColor="white" stopOpacity="0.7"/>
                     <stop offset="70%" stopColor="white" stopOpacity="0.7"/>
                     <stop offset="100%" stopColor="white" stopOpacity="0"/>
                   </linearGradient>
                 </defs>
-                <rect width="500" height="500" fill="url(#bgGrad)"/>
+                <rect width="500" height="500" fill="url(#bgGradF)"/>
                 <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(45)"/>
                 <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(-45)"/>
-                <rect x="246" y="165" width="1.5" height="170" rx="0.75" fill="url(#lineGrad)"/>
+                <rect x="246" y="165" width="1.5" height="170" rx="0.75" fill="url(#lineGradF)"/>
                 <circle cx="315" cy="250" r="52" fill="none" stroke="white" strokeWidth="16"/>
               </svg>
               <span className="text-gray-900 font-semibold text-sm tracking-tight">xOpsentia</span>
             </Link>
-            <p className="text-xs text-gray-400" style={{ lineHeight: 1.6 }}>
-              Field-ready AI for industrial operations.
-            </p>
+            <p className="text-xs text-gray-400" style={{ lineHeight: 1.7 }}>Institutional Intelligence for Field operations.</p>
           </div>
 
-          {/* Nav groups — right aligned */}
-          <div className="flex flex-wrap md:flex-nowrap gap-8 md:justify-end m-[0px] p-[0px]">
-            {Object.entries(footerLinks).map(([section, links]) => (
-              <div key={section} className="space-y-3 px-[6px] py-[0px] text-left">
-                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider p-[0px]">{section}</p>
-                <ul className="space-y-2">
-                  {links.map((link) => (
-                    <li className="ml-[-1px] mr-[0px] mt-[0px] mb-[8px] p-[0px]" key={link}>
-                      {getHref(link) !== "#" ? (
-                        <Link
-                          to={getHref(link)}
-                          className="text-xs text-gray-400 hover:text-gray-700 transition-colors p-[0px] m-[0px]"
-                        >
-                          {link}
-                        </Link>
-                      ) : (
-                        <a href="#" className="text-xs text-gray-400 hover:text-gray-700 transition-colors p-[0px] m-[0px]">
-                          {link}
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Links */}
+          <div className="flex flex-wrap gap-12">
+            {/* Company */}
+            <div className="space-y-3">
+              <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Company</p>
+              <ul className="space-y-2.5">
+                <li>
+                  <Link to="/about" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">
+                    About us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal / Privacy */}
+            <div className="space-y-3">
+              <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Privacy</p>
+              <ul className="space-y-2.5">
+                <li>
+                  <Link to="/data-privacy" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">
+                    Data Privacy
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
 
         {/* Bottom bar */}
-        <div className="w-full mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="w-full mt-8 flex flex-row items-center justify-between">
           <p className="text-xs text-gray-400">
             © {new Date().getFullYear()} xOpsentia. All rights reserved.
           </p>
@@ -104,8 +84,8 @@ export function Footer() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="26"
+              height="26"
               viewBox="0 0 24 24"
               fill="currentColor"
             >

@@ -49,7 +49,7 @@ export function Security() {
         </div>
 
         <Link
-          to="/platform/knowledge-base"
+          to="/data-privacy"
           className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02]"
           style={{
             background: "#0D9488",

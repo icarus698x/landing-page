@@ -133,7 +133,7 @@ export function Features() {
                       </div>
 
                       {/* Screenshot — mobile only */}
-                      <div className="mt-7 md:hidden" style={screenshotMaskStyle}>
+                      <div className="mt-7 md:hidden feature-screenshot-mobile" style={screenshotMaskStyle}>
                         <f.Screenshot />
                       </div>
                     </div>
@@ -175,13 +175,6 @@ export function Features() {
 
         </div>
       </div>
-
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(6px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   );
 }

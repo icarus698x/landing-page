@@ -1,68 +1,129 @@
-import { useState } from "react";
-import { TalkToUsModal } from "./TalkToUsModal";
+import { Link } from "react-router";
+
+const pills = [
+  { icon: "🔒", text: "On-premise deployment" },
+  { icon: "📄", text: "No manual sharing" },
+  { icon: "⚡", text: "Instant answers" },
+  { icon: "🛠️", text: "Built for field use" },
+];
 
 export function ClosingCTA() {
-  const [modalOpen, setModalOpen] = useState(false);
-
   return (
-    <>
-      <section
-        className="relative py-28 md:py-36 bg-white"
-        style={{ background: "#f8f9fa" }}
-      >
-        <div className="relative z-10 max-w-xl mx-auto px-6 text-center space-y-7">
-          {/* Logo */}
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <svg width="28" height="28" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 7 }}>
-                <defs>
-                  <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#04c4b4"/>
-                    <stop offset="50%" stopColor="#0D9488"/>
-                    <stop offset="100%" stopColor="#045f5f"/>
-                  </linearGradient>
-                  <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="white" stopOpacity="0"/>
-                    <stop offset="30%" stopColor="white" stopOpacity="0.7"/>
-                    <stop offset="70%" stopColor="white" stopOpacity="0.7"/>
-                    <stop offset="100%" stopColor="white" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-                <rect width="500" height="500" fill="url(#bgGrad)"/>
-                <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(45)"/>
-                <rect x="-60" y="-8" width="120" height="16" rx="8" fill="white" transform="translate(185,250) rotate(-45)"/>
-                <rect x="246" y="165" width="1.5" height="170" rx="0.75" fill="url(#lineGrad)"/>
-                <circle cx="315" cy="250" r="52" fill="none" stroke="white" strokeWidth="16"/>
-              </svg>
-          </div>
+    <section
+      className="relative overflow-hidden py-28 md:py-36"
+      style={{
+        background: "linear-gradient(135deg, #0F1729 0%, #0a1520 50%, #0D2B28 100%)",
+      }}
+    >
+      {/* Decorative teal glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 50% 110%, rgba(13,148,136,0.22) 0%, transparent 70%)",
+        }}
+      />
 
-          <h2
-            className="text-4xl md:text-5xl text-gray-900 tracking-tight"
-            style={{ fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em" }}
-          >
-            xOpsentia
-          </h2>
+      {/* Top edge fade */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(13,148,136,0.4), transparent)" }}
+      />
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="px-8 py-3.5 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02]"
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        {/* Eyebrow */}
+        <div
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8"
+          style={{
+            background: "rgba(13,148,136,0.15)",
+            border: "1px solid rgba(13,148,136,0.3)",
+          }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ background: "#0D9488", boxShadow: "0 0 6px #0D9488" }}
+          />
+          <span className="text-xs font-semibold tracking-wider" style={{ color: "#4fd1c5" }}>
+            Ready when your team is
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h2
+          className="text-4xl md:text-5xl lg:text-6xl text-white tracking-tight mb-6"
+          style={{ fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em" }}
+        >
+          Put the right answer in every
+          <br />
+          <span style={{ color: "#2dd4bf" }}>technician's hands.</span>
+        </h2>
+
+        {/* Sub */}
+        <p
+          className="text-base md:text-lg mb-10 max-w-xl mx-auto"
+          style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.75 }}
+        >
+          xOpsentia runs inside your environment. You bring the manuals.
+          We deliver the intelligence. Your data never leaves your control.
+        </p>
+
+        {/* Feature pills */}
+        {/* <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+          {pills.map((p) => (
+            <div
+              key={p.text}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm"
               style={{
-                background: "#0D9488",
-                boxShadow: "0 6px 28px rgba(13,148,136,0.32)",
-                borderRadius: 7,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                color: "rgba(255,255,255,0.7)",
               }}
             >
-              Contact us
-            </button>
-          </div>
+              <span>{p.icon}</span>
+              <span>{p.text}</span>
+            </div>
+          ))}
+        </div> */}
 
-          <p className="text-xs text-gray-400 pt-2">
-            Built for regulated environment. No manuals sharing required.
-          </p>
+        {/* CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02]"
+            style={{
+              background: "#0D9488",
+              boxShadow: "0 8px 32px rgba(13,148,136,0.45), 0 2px 8px rgba(0,0,0,0.3)",
+            }}
+          >
+            Contact us
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 7h10M7 2l5 5-5 5"/>
+            </svg>
+          </Link>
+
+          <Link
+            to="/about"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-sm font-semibold transition-all hover:bg-white/10"
+            style={{
+              border: "1px solid rgba(255,255,255,0.15)",
+              color: "rgba(255,255,255,0.7)",
+            }}
+          >
+            Learn about us
+          </Link>
         </div>
-      </section>
 
-      <TalkToUsModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    </>
+        {/* Trust footnote */}
+        <p className="text-xs mt-8" style={{ color: "rgba(255,255,255,0.4)" }}> Designed for regulated environments.</p>
+      </div>
+    </section>
   );
 }
