@@ -52,7 +52,7 @@ export function ClosingCTA() {
                 borderRadius: 7,
               }}
             >
-              Talk to us
+              Contact us
             </button>
           </div>
 
